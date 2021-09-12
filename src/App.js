@@ -21,7 +21,6 @@ const accurateInterval = function (fn, time) {
     cancel: cancel
   };
 };
-
 export default function Timer() {
   const [brkLength, setBrkLength0] = useState(5);
   const [seshLength, setSeshLength0] = useState(25);
@@ -31,27 +30,25 @@ export default function Timer() {
   const [intervalID, setIntervalID] = useState("");
   const [alarmColor, setAlarmColor] = useState({ color: "white" });
   function setBrkLength(e) {
-    lengthControl(e.currentTarget.value, brkLength, "Session");
+    lengthControl("brkLength", e.currentTarget.value, brkLength, "Session");
   }
   function setSeshLength(e) {
-    lengthControl(e.currentTarget.value, seshLength, "Break");
+    lengthControl("seshLength", e.currentTarget.value, seshLength, "Break");
   }
-  function lengthControl(sign, currentLength, timerType) {
+  function lengthControl(stateToChange, sign, currentLength, timerType1) {
     if (timerState === "running") {
       return;
     }
-    if (timerType === timerType) {
-      if (sign === "-" && currentLength !== 1) {
-        setBrkLength0(currentLength - 1);
-      } else if (sign === "+" && currentLength !== 60) {
-        setBrkLength0(currentLength + 1);
-      }
-    } else if (sign === "-" && currentLength !== 1) {
-      setBrkLength0(currentLength - 1);
-      setTimer(currentLength * 60 - 60);
+    if (sign === "-" && currentLength !== 1) {
+      stateToChange === "brkLength"
+        ? setBrkLength0(currentLength - 1)
+        : setSeshLength0(currentLength - 1);
+      timerType !== timerType1 && setTimer(currentLength * 60 - 60);
     } else if (sign === "+" && currentLength !== 60) {
-      setBrkLength0(currentLength + 1);
-      setTimer(currentLength * 60 + 60);
+      stateToChange === "brkLength"
+        ? setBrkLength0(currentLength + 1)
+        : setSeshLength0(currentLength + 1);
+      timerType !== timerType1 && setTimer(currentLength * 60 + 60);
     }
   }
   function timerControl() {
