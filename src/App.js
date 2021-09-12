@@ -71,7 +71,7 @@ export default function Timer() {
     );
   }
   function decrementTimer() {
-    setTimer(timer - 1);
+    setTimer((t) => t - 1);
   }
   function phaseControl() {
     let timer1 = timer;
